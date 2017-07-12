@@ -30,7 +30,7 @@ namespace HotelManagement.Business.DAO
             }
             finally
             {
-                objData.Disconnect();
+                objData.Disconnect(); 
             }
         }
         /// <summary>

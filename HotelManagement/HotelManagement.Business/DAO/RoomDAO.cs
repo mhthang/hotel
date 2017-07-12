@@ -105,7 +105,7 @@ namespace HotelManagement.Business.DAO
             catch (Exception objEx)
             {
                 throw objEx;
-            }
+            } 
             finally
             {
                 objData.Disconnect();
