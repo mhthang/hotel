@@ -239,6 +239,7 @@
     <Compile Include="Controllers\ComController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\RoomApiController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1086,6 +1087,12 @@
     <Content Include="Scripts\plugins\oclazyload\LICENSE.md" />
     <Content Include="Scripts\plugins\oclazyload\README.md" />
     <Content Include="Scripts\plugins\toastr\toastr.js.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HotelManagement.Business\HotelManagement.Business.csproj">
+      <Project>{488269B9-892E-400D-844D-18C8CBA9D731}</Project>
+      <Name>HotelManagement.Business</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
