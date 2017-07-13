@@ -1,27 +1,6 @@
-﻿function HeaderCtrl($scope, $rootScope, $http, $modal, $localStorage, $location, Constants, AuthService) {
+﻿function HeaderCtrl($scope, $rootScope, $http, $modal, $localStorage, $location, Constants) {
 
-    AuthService.isAuthenticated().then(function (response) {
-        if (!response) {
-            $location.path("/login");
-        }
-    }, function (response) {
-        alert("Could not check Authentication");
-    });
-
-    $scope.logout = function () {
-        AuthService.logOut().then(function (response) {
-            if (response) {
-                $location.path("/login");
-            }
-            else {
-                alert("Could not Logout");
-            }
-        }, function (response) {
-            alert("Could not Logout");
-        });
-
-        return false;
-    };
+   
 
     $scope.UserProfile = {
         Id: null,

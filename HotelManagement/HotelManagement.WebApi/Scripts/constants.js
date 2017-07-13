@@ -131,7 +131,7 @@ var Constants = (function () {
         Room: {
             Get: rootApiUrl + '/OrganizationApi/GetRoom',
             GetDetails: rootApiUrl + '/OrganizationApi/GetRoomDetails',
-            Search: rootApiUrl + '/OrganizationApi/SearchSemesterRoom',
+            Search: rootApiUrl + '/RoomApi/GetAll',
             GetSemesterRooms: rootApiUrl + '/OrganizationApi/GetSemesterRooms',
             CreateOrUpdate: rootApiUrl + '/OrganizationApi/CreateOrUpdateRoom',
             Delete: rootApiUrl + '/OrganizationApi/DeleteRoom',

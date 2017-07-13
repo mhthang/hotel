@@ -17,7 +17,7 @@
  *
  */
 
-function MainCtrl($scope, $rootScope, $http, $modal, $localStorage, $location, $translate, AuthService) {
+function MainCtrl($scope, $rootScope, $http, $modal, $localStorage, $location, $translate) {
 
     $rootScope.UserPhotos = [];
     $rootScope.lang = $localStorage.language;

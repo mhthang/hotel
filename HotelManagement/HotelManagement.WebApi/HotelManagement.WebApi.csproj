@@ -240,6 +240,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\RoomApiController.cs" />
+    <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1044,6 +1045,7 @@
     <Content Include="Views\Shared\Admin\_RightSidebar.cshtml" />
     <Content Include="Views\Shared\Admin\_SkinConfig.cshtml" />
     <Content Include="Views\Shared\Admin\_TopNavbar.cshtml" />
+    <Content Include="Views\Room\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

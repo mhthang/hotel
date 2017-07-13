@@ -11,8 +11,8 @@
 
     $scope.onload = function () {
         $scope.pager.PageIndex = 1;
-        getBuiling($scope.SemId);
-        search($scope.SemId);
+        //getBuiling($scope.SemId);
+        search();
     };
 
     $scope.onsearch = function () {
@@ -22,15 +22,14 @@
 
     $scope.SearchResponse = null;
 
-    var search = function (semesterId) {
+    var search = function () {
         var requestModel = {
-            Id: semesterId,
-            FilterId: $scope.buildingId,
-            FilterText: $scope.searchText,
-            Pager: $scope.pager
+            RoomName: '',
+            PageSize: 10,
+            PageIndex: 1
         };
 
-        $http.post(Constants.WebApi.Room.Search, requestModel).then(function (response) {
+        $http.get(Constants.WebApi.Room.Search, { params: requestModel }).then(function (response) {
             // this callback will be called asynchronously
             // when the response is available            
             $scope.SearchResponse = response.data;
