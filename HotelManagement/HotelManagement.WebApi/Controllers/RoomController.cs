@@ -13,5 +13,13 @@ namespace HotelManagement.WebApi.Controllers
         {
             return View();
         }
+        public ActionResult RoomList()
+        {
+            return View();
+        }
+        public ActionResult RoomDetail()
+        {
+            return View();
+        }
     }
 }

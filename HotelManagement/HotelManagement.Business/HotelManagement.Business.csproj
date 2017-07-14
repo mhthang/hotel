@@ -39,7 +39,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="TGDD.Library.Data">
-      <HintPath>..\..\..\TGDD\DLL\TGDD.Library.Data.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Work\MWG\TGDD\DLL\TGDD.Library.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
