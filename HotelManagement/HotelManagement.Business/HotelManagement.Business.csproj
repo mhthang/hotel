@@ -43,6 +43,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\OrderBLL.cs" />
     <Compile Include="BLL\RoomBLL.cs" />
     <Compile Include="Commons.cs" />
     <Compile Include="DAO\OrderDAO.cs" />

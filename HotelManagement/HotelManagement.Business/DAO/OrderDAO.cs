@@ -43,7 +43,7 @@ namespace HotelManagement.Business.DAO
             try
             {
                 objData.Connect();
-                objData.CreateNewStoredProcedure("HO_GoldenBoard_GetByType");
+                objData.CreateNewStoredProcedure("OrderDetail_SelectByID");
                 objData.AddParameter("@OrderID", intOrderID);
                 return objData.ExecStoreToDataTable();
             }
