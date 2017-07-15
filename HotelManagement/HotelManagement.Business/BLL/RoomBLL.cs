@@ -29,5 +29,10 @@ namespace HotelManagement.Business.BLL
         {
             return objDAO.Delete(ID, Userlogin);
         }
+
+        public DataTable GetRoomOrderByStatus(int intStatus, int intPageSize, int intPageIndex)
+        {
+            return objDAO.GetRoomOrderByStatus(intStatus,intPageSize,intPageIndex);
+        }
     }
 }

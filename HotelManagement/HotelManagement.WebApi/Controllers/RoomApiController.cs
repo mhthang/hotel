@@ -36,5 +36,12 @@ namespace HotelManagement.WebApi.Controllers
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
             return response;
         }
+        [HttpGet]
+        public HttpResponseMessage GetRoomOrderByStatus(int Status, int PageSize, int PageIndex)
+        {
+            var result = objBll.GetRoomOrderByStatus(Status, PageSize, PageIndex);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            return response;
+        }
     }
 }

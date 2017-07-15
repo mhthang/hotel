@@ -111,5 +111,27 @@ namespace HotelManagement.Business.DAO
                 objData.Disconnect();
             }
         }
+
+        public DataTable GetRoomOrderByStatus(int intStatus, int intPageSize, int intPageIndex)
+        {
+            IData objData = Data.CreateData();
+            try
+            {
+                objData.Connect();
+                objData.CreateNewStoredProcedure("Order_Product_SelectByType");
+                objData.AddParameter("@Status", intStatus);
+                objData.AddParameter("@PageSize", intPageSize);
+                objData.AddParameter("@PageIndex",intPageIndex);
+                return objData.ExecStoreToDataTable();
+            }
+            catch (Exception objEx)
+            {
+                throw objEx;
+            }
+            finally
+            {
+                objData.Disconnect();
+            }
+        }
     }
 }
