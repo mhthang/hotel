@@ -1,4 +1,5 @@
-﻿using HotelManagement.Business.DAO;
+﻿using HotelManagement.Business.BO.Order;
+using HotelManagement.Business.DAO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,9 +13,53 @@ namespace HotelManagement.Business.BLL
     public class OrderBLL
     {
         private OrderDAO objDAO = new OrderDAO();
-        public DataTable GetByID(int intOrderID)
+        public OrderBO GetByID(int intOrderID)
         {
-            return objDAO.GetByID(intOrderID);
+            OrderBO objOrder = new OrderBO();
+            DataTable dt = objDAO.GetByID(intOrderID);
+            if (dt.Rows.Count > 0)
+            {
+                objOrder.Address = dt.Rows[0]["Address"].ToString();
+                objOrder.CheckinDate = !string.IsNullOrEmpty(dt.Rows[0]["CheckInDate"].ToString()) ? Convert.ToDateTime(dt.Rows[0]["CheckInDate"].ToString()) : DateTime.MinValue;
+                objOrder.CheckOutDate = !string.IsNullOrEmpty(dt.Rows[0]["CheckOutDate"].ToString()) ? Convert.ToDateTime(dt.Rows[0]["CheckOutDate"].ToString()) : DateTime.MinValue;
+                objOrder.CustomerID = !string.IsNullOrEmpty(dt.Rows[0]["CustomerID"].ToString()) ? Convert.ToInt32(dt.Rows[0]["CustomerID"].ToString()) : -1;
+                objOrder.CustomerName = dt.Rows[0]["CustomerName"].ToString();
+                objOrder.Email = dt.Rows[0]["Email"].ToString();
+                objOrder.IDNo = dt.Rows[0]["IDNo"].ToString();
+                objOrder.Note = dt.Rows[0]["Note"].ToString();
+                objOrder.OrderID = !string.IsNullOrEmpty(dt.Rows[0]["OrderID"].ToString()) ? Convert.ToInt32(dt.Rows[0]["OrderID"].ToString()) : -1;
+                objOrder.Phone = dt.Rows[0]["Phone"].ToString();
+                objOrder.QuantityPeople = !string.IsNullOrEmpty(dt.Rows[0]["QuantityPeople"].ToString()) ? Convert.ToInt32(dt.Rows[0]["QuantityPeople"].ToString()) : -1;
+                objOrder.RoomID = !string.IsNullOrEmpty(dt.Rows[0]["RoomID"].ToString()) ? Convert.ToInt32(dt.Rows[0]["RoomID"].ToString()) : -1;
+                objOrder.Userlogin = "Chó Quốc";// nhớ sửa lại =)))
+                objOrder.OrderDetail = new List<OrderDetail>();
+                foreach (DataRow item in dt.Rows)
+                {
+                    OrderDetail objDetail = new OrderDetail();
+                    objDetail.OrderID  = !string.IsNullOrEmpty(item["OrderID"].ToString()) ? Convert.ToInt32(item["OrderID"].ToString()) : -1;
+                    objDetail.Note = item["Note"].ToString();
+                    objDetail.Price = !string.IsNullOrEmpty(item["Price"].ToString()) ? Convert.ToInt32(item["Price"].ToString()) : -1;
+                    objDetail.ProductID = !string.IsNullOrEmpty(item["ProductID"].ToString()) ? Convert.ToInt32(item["ProductID"].ToString()) : -1;
+                    objDetail.Quantity = !string.IsNullOrEmpty(item["Quantity"].ToString()) ? Convert.ToInt32(item["Quantity"].ToString()) : -1;
+                    objDetail.CreatedDate  = !string.IsNullOrEmpty(item["CreatedDate"].ToString()) ? Convert.ToDateTime(item["CreatedDate"].ToString()) : DateTime.MinValue;
+                    objOrder.OrderDetail.Add(objDetail);
+                }
+            }
+            
+            return objOrder;
+        }
+        public int Insert_Update(int intOrderID, int intRoomID, int intCustomerID, string strCustomerName, string strPhone, string strAddress, string strIDNo, string strEmail, DateTime CheckinDate, DateTime CheckOutDate, int intQuantityPeople, string Note, string Userlogin,List<OrderDetail> objOrderDetail)
+        {
+            int OrderID = objDAO.Insert_Update(intOrderID, intRoomID, intCustomerID, strCustomerName, strPhone, strAddress, strIDNo, strEmail, CheckinDate, CheckOutDate, intQuantityPeople, Note, Userlogin);
+            if (intOrderID > 0)
+            {
+                foreach (OrderDetail item in objOrderDetail)
+                {
+                    objDAO.InsertDetail(item.OrderID, item.ProductID, item.Quantity, item.Price, "", Userlogin);
+                }
+                
+            }
+            return 1;
         }
     }
 }

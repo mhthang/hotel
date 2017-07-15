@@ -47,6 +47,7 @@
     <Compile Include="BLL\OrderBLL.cs" />
     <Compile Include="BLL\ProductBLL.cs" />
     <Compile Include="BLL\RoomBLL.cs" />
+    <Compile Include="BO\Order\OrderBO.cs" />
     <Compile Include="Commons.cs" />
     <Compile Include="DAO\CustomerDAO.cs" />
     <Compile Include="DAO\OrderDAO.cs" />
@@ -54,9 +55,7 @@
     <Compile Include="DAO\RoomDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BO\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

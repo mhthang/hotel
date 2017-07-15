@@ -60,22 +60,27 @@ namespace HotelManagement.Business.DAO
         /// Thêm/ cập nhật phòng
         /// </summary>
         /// <returns></returns>
-        public int Insert_Update(int intOrderID,int intCustomerID,DateTime CheckinDate,DateTime CheckOutDate,int Status,string Note,string Userlogin)
+        public int Insert_Update(int intOrderID,int intRoomID,int intCustomerID,string strCustomerName,string strPhone,string strAddress,string strIDNo,string strEmail, DateTime CheckinDate,DateTime CheckOutDate,int intQuantityPeople, string Note,string Userlogin)
         {
             IData objData = Data.CreateData();
             try
             {
                 objData.Connect();
-                objData.CreateNewStoredProcedure("HO_GoldenBoard_GetByType");
+                objData.CreateNewStoredProcedure("Order_Create_Update");
                 objData.AddParameter("@OrderID", intOrderID);
                 objData.AddParameter("@CustomerID", intCustomerID);
                 objData.AddParameter("@CheckinDate", CheckinDate);
                 objData.AddParameter("@CheckOutDate", CheckOutDate);
-                objData.AddParameter("@Status", Status);
+                objData.AddParameter("@QuantityPeople", intQuantityPeople);
+                objData.AddParameter("@CustomerName", strCustomerName);
+                objData.AddParameter("@RoomID", intRoomID);
+                objData.AddParameter("@Phone", strPhone);
+                objData.AddParameter("@Address", strAddress);
+                objData.AddParameter("@IDNo",strIDNo);
+                objData.AddParameter("@Email",strEmail);
                 objData.AddParameter("@Note",Note);
                 objData.AddParameter("@Userlogin", Userlogin);
-                objData.ExecNonQuery();
-                return 1;
+                return Convert.ToInt32(objData.ExecStoreToString());
             }
             catch (Exception objEx)
             {
@@ -86,6 +91,33 @@ namespace HotelManagement.Business.DAO
                 objData.Disconnect();
             }
         }
+
+
+        public int InsertDetail(int intOrderID, int intProductID, int intQuantity,double dPrice, string Note, string Userlogin)
+        {
+            IData objData = Data.CreateData();
+            try
+            {
+                objData.Connect();
+                objData.CreateNewStoredProcedure("OrderDetail_Insert");
+                objData.AddParameter("@OrderID", intOrderID);
+                objData.AddParameter("@ProductID", intProductID);
+                objData.AddParameter("@Quantity", intQuantity);
+                objData.AddParameter("@Price", dPrice);
+                objData.AddParameter("@Note", Note);
+                objData.AddParameter("@Userlogin", Userlogin);
+                return Convert.ToInt32(objData.ExecStoreToString());
+            }
+            catch (Exception objEx)
+            {
+                throw objEx;
+            }
+            finally
+            {
+                objData.Disconnect();
+            }
+        }
+
         /// <summary>
         /// Xóa phòng
         /// </summary>
