@@ -70,7 +70,8 @@ namespace HotelManagement.Business.DAO
                 objData.AddParameter("@OrderID", intOrderID);
                 objData.AddParameter("@CustomerID", intCustomerID);
                 objData.AddParameter("@CheckinDate", CheckinDate);
-                objData.AddParameter("@CheckOutDate", CheckOutDate);
+                if (CheckOutDate != null && CheckOutDate != DateTime.MinValue)
+                    objData.AddParameter("@CheckOutDate", CheckOutDate);
                 objData.AddParameter("@QuantityPeople", intQuantityPeople);
                 objData.AddParameter("@CustomerName", strCustomerName);
                 objData.AddParameter("@RoomID", intRoomID);

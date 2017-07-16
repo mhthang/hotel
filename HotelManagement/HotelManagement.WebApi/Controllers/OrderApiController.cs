@@ -20,7 +20,7 @@ namespace HotelManagement.WebApi.Controllers
             return response;
         }
         [HttpPost]
-        public HttpResponseMessage Insert_Update(OrderBO objOrder)
+        public HttpResponseMessage Insert_Update([FromBody]OrderBO objOrder)
         {
             var result = objBLL.Insert_Update(objOrder.OrderID, objOrder.RoomID, objOrder.CustomerID, objOrder.CustomerName, objOrder.Phone, objOrder.Address, objOrder.IDNo, objOrder.Email, Convert.ToDateTime(objOrder.CheckinDate), Convert.ToDateTime(objOrder.CheckOutDate), objOrder.QuantityPeople, objOrder.Note, objOrder.Userlogin,objOrder.OrderDetail);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);

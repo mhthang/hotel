@@ -54,6 +54,11 @@ namespace HotelManagement.Business.BLL
         }
         public int Insert_Update(int intOrderID, int intRoomID, int intCustomerID, string strCustomerName, string strPhone, string strAddress, string strIDNo, string strEmail, DateTime CheckinDate, DateTime CheckOutDate, int intQuantityPeople, string Note, string Userlogin,List<OrderDetail> objOrderDetail)
         {
+            if (CheckinDate == null | CheckinDate == DateTime.MinValue)
+            {
+                CheckinDate = DateTime.Now;
+            }
+            
             int OrderID = objDAO.Insert_Update(intOrderID, intRoomID, intCustomerID, strCustomerName, strPhone, strAddress, strIDNo, strEmail, CheckinDate, CheckOutDate, intQuantityPeople, Note, Userlogin);
             if (intOrderID > 0)
             {
