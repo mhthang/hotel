@@ -9,6 +9,7 @@ namespace HotelManagement.Business.BO.Order
         public int RoomID { get; set; }
         public int CustomerID { get; set; }
         public string CustomerName { get; set; }
+        public string RoomName { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
         public string IDNo { get; set; }

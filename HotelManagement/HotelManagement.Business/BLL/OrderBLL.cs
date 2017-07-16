@@ -31,6 +31,7 @@ namespace HotelManagement.Business.BLL
                 objOrder.Phone = dt.Rows[0]["Phone"].ToString();
                 objOrder.QuantityPeople = !string.IsNullOrEmpty(dt.Rows[0]["QuantityPeople"].ToString()) ? Convert.ToInt32(dt.Rows[0]["QuantityPeople"].ToString()) : -1;
                 objOrder.RoomID = !string.IsNullOrEmpty(dt.Rows[0]["RoomID"].ToString()) ? Convert.ToInt32(dt.Rows[0]["RoomID"].ToString()) : -1;
+                objOrder.RoomName = dt.Rows[0]["RoomName"].ToString();
                 objOrder.Userlogin = "Chó Quốc";// nhớ sửa lại =)))
                 objOrder.OrderDetail = new List<OrderDetail>();
                 foreach (DataRow item in dt.Rows)
