@@ -15,5 +15,9 @@ namespace HotelManagement.Business.BLL
         {
             return objDAO.GetAll(strKeyword, intPageSize, intPageIndex);
         }
+        public DataTable GetGroupByOrderID(int intOderID)
+        {
+            return objDAO.GetGroupByOrderID(intOderID);
+        }
     }
 }

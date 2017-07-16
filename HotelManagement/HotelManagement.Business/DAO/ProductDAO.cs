@@ -31,5 +31,24 @@ namespace HotelManagement.Business.DAO
                 objData.Disconnect();
             }
         }
+        public DataTable GetGroupByOrderID(int intOderID)
+        {
+            IData objData = Data.CreateData();
+            try
+            {
+                objData.Connect();
+                objData.CreateNewStoredProcedure("Product_SelectAll");
+                objData.AddParameter("@OrderID", intOderID);
+                return objData.ExecStoreToDataTable();
+            }
+            catch (Exception objEx)
+            {
+                throw objEx;
+            }
+            finally
+            {
+                objData.Disconnect();
+            }
+        }
     }
 }
