@@ -41,6 +41,7 @@ namespace HotelManagement.Business.BLL
                     OrderDetail objDetail = new OrderDetail();
                     objDetail.OrderID  = !string.IsNullOrEmpty(item["OrderID"].ToString()) ? Convert.ToInt32(item["OrderID"].ToString()) : -1;
                     objDetail.Note = item["Note"].ToString();
+                    objDetail.ProductName = item["ProductName"].ToString();
                     objDetail.Price = !string.IsNullOrEmpty(item["Price"].ToString()) ? Convert.ToInt32(item["Price"].ToString()) : -1;
                     objDetail.ProductID = !string.IsNullOrEmpty(item["ProductID"].ToString()) ? Convert.ToInt32(item["ProductID"].ToString()) : -1;
                     objDetail.Quantity = !string.IsNullOrEmpty(item["Quantity"].ToString()) ? Convert.ToInt32(item["Quantity"].ToString()) : -1;
