@@ -60,7 +60,7 @@ namespace HotelManagement.Business.BLL
             }
             
             int OrderID = objDAO.Insert_Update(intOrderID, intRoomID, intCustomerID, strCustomerName, strPhone, strAddress, strIDNo, strEmail, CheckinDate, CheckOutDate, intQuantityPeople, Note, Userlogin);
-            if (intOrderID > 0)
+            if (OrderID > 0)
             {
                 foreach (OrderDetail item in objOrderDetail)
                 {
