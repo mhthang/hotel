@@ -20,8 +20,8 @@ namespace HotelManagement.Business.BLL
             if (dt.Rows.Count > 0)
             {
                 objOrder.Address = dt.Rows[0]["Address"].ToString();
-                objOrder.CheckinDate = !string.IsNullOrEmpty(dt.Rows[0]["CheckInDate"].ToString()) ? Convert.ToDateTime(dt.Rows[0]["CheckInDate"].ToString()) : DateTime.MinValue;
-                objOrder.CheckOutDate = !string.IsNullOrEmpty(dt.Rows[0]["CheckOutDate"].ToString()) ? Convert.ToDateTime(dt.Rows[0]["CheckOutDate"].ToString()) : DateTime.MinValue;
+                objOrder.CheckinDate = !string.IsNullOrEmpty(dt.Rows[0]["CheckInDate"].ToString()) ? Convert.ToDateTime(dt.Rows[0]["CheckInDate"].ToString()).ToString("dd/MM/yyyy hh:mm") : string.Empty;
+                objOrder.CheckOutDate = !string.IsNullOrEmpty(dt.Rows[0]["CheckOutDate"].ToString()) ? Convert.ToDateTime(dt.Rows[0]["CheckOutDate"].ToString()).ToString("dd/MM/yyyy hh:mm") : string.Empty;
                 objOrder.CustomerID = !string.IsNullOrEmpty(dt.Rows[0]["CustomerID"].ToString()) ? Convert.ToInt32(dt.Rows[0]["CustomerID"].ToString()) : -1;
                 objOrder.CustomerName = dt.Rows[0]["CustomerName"].ToString();
                 objOrder.Email = dt.Rows[0]["Email"].ToString();
@@ -32,6 +32,8 @@ namespace HotelManagement.Business.BLL
                 objOrder.QuantityPeople = !string.IsNullOrEmpty(dt.Rows[0]["QuantityPeople"].ToString()) ? Convert.ToInt32(dt.Rows[0]["QuantityPeople"].ToString()) : -1;
                 objOrder.RoomID = !string.IsNullOrEmpty(dt.Rows[0]["RoomID"].ToString()) ? Convert.ToInt32(dt.Rows[0]["RoomID"].ToString()) : -1;
                 objOrder.RoomName = dt.Rows[0]["RoomName"].ToString();
+                objOrder.PriceRoom = !string.IsNullOrEmpty(dt.Rows[0]["PriceRoom"].ToString()) ? Convert.ToInt32(dt.Rows[0]["PriceRoom"].ToString()) : -1;
+                objOrder.TotalRoom = !string.IsNullOrEmpty(dt.Rows[0]["TotalRoom"].ToString()) ? Convert.ToInt32(dt.Rows[0]["TotalRoom"].ToString()) : -1;
                 objOrder.Userlogin = "Chó Quốc";// nhớ sửa lại =)))
                 objOrder.OrderDetail = new List<OrderDetail>();
                 foreach (DataRow item in dt.Rows)

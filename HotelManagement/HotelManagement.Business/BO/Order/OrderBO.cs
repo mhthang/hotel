@@ -14,11 +14,15 @@ namespace HotelManagement.Business.BO.Order
         public string Address { get; set; }
         public string IDNo { get; set; }
         public string Email { get; set; }
-        public DateTime CheckinDate { get; set; }
-        public DateTime CheckOutDate { get; set; }
+        public string CheckinDate { get; set; }
+        public string CheckOutDate { get; set; }
         public int QuantityPeople { get; set; }
         public string Note { get; set; }
         public string Userlogin { get; set; }
+
+        public double PriceRoom { get; set; }
+
+        public double TotalRoom { get; set; }
 
         public List<OrderDetail> OrderDetail { get; set; }
     }
