@@ -22,7 +22,9 @@ namespace HotelManagement.WebApi.Controllers
         [HttpPost]
         public HttpResponseMessage Insert_Update([FromBody]OrderBO objOrder)
         {
-            var result = objBLL.Insert_Update(objOrder.OrderID, objOrder.RoomID, objOrder.CustomerID, objOrder.CustomerName, objOrder.Phone, objOrder.Address, objOrder.IDNo, objOrder.Email, Convert.ToDateTime(objOrder.CheckinDate), Convert.ToDateTime(objOrder.CheckOutDate), objOrder.QuantityPeople, objOrder.Note, objOrder.Userlogin,objOrder.OrderDetail);
+            DateTime dtFromDate = !string.IsNullOrEmpty(objOrder.CheckinDate) ? Convert.ToDateTime(objOrder.CheckinDate) : DateTime.Now;
+            DateTime dtToDate = !string.IsNullOrEmpty(objOrder.CheckOutDate) ? Convert.ToDateTime(objOrder.CheckOutDate) : DateTime.MinValue;
+            var result = objBLL.Insert_Update(objOrder.OrderID, objOrder.RoomID, objOrder.CustomerID, objOrder.CustomerName, objOrder.Phone, objOrder.Address, objOrder.IDNo, objOrder.Email, dtFromDate, dtToDate, objOrder.QuantityPeople, objOrder.Note, objOrder.Userlogin,objOrder.OrderDetail);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
             return response;
         }
