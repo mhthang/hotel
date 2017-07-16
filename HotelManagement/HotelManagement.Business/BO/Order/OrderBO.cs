@@ -39,6 +39,6 @@ namespace HotelManagement.Business.BO.Order
 
         public string Note { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public string CreatedDate { get; set; }
     }
 }

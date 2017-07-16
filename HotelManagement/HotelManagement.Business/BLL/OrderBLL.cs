@@ -29,11 +29,11 @@ namespace HotelManagement.Business.BLL
                 objOrder.Note = dt.Rows[0]["Note"].ToString();
                 objOrder.OrderID = !string.IsNullOrEmpty(dt.Rows[0]["OrderID"].ToString()) ? Convert.ToInt32(dt.Rows[0]["OrderID"].ToString()) : -1;
                 objOrder.Phone = dt.Rows[0]["Phone"].ToString();
-                objOrder.QuantityPeople = !string.IsNullOrEmpty(dt.Rows[0]["QuantityPeople"].ToString()) ? Convert.ToInt32(dt.Rows[0]["QuantityPeople"].ToString()) : -1;
+                objOrder.QuantityPeople = !string.IsNullOrEmpty(dt.Rows[0]["QuantityPeople"].ToString()) ? Convert.ToInt32(dt.Rows[0]["QuantityPeople"].ToString()) : 0;
                 objOrder.RoomID = !string.IsNullOrEmpty(dt.Rows[0]["RoomID"].ToString()) ? Convert.ToInt32(dt.Rows[0]["RoomID"].ToString()) : -1;
                 objOrder.RoomName = dt.Rows[0]["RoomName"].ToString();
-                objOrder.PriceRoom = !string.IsNullOrEmpty(dt.Rows[0]["PriceRoom"].ToString()) ? Convert.ToInt32(dt.Rows[0]["PriceRoom"].ToString()) : -1;
-                objOrder.TotalRoom = !string.IsNullOrEmpty(dt.Rows[0]["TotalRoom"].ToString()) ? Convert.ToInt32(dt.Rows[0]["TotalRoom"].ToString()) : -1;
+                objOrder.PriceRoom = !string.IsNullOrEmpty(dt.Rows[0]["PriceRoom"].ToString()) ? Convert.ToInt32(dt.Rows[0]["PriceRoom"].ToString()) : 0;
+                objOrder.TotalRoom = !string.IsNullOrEmpty(dt.Rows[0]["TotalRoom"].ToString()) ? Convert.ToInt32(dt.Rows[0]["TotalRoom"].ToString()) : 0;
                 objOrder.Userlogin = "Chó Quốc";// nhớ sửa lại =)))
                 objOrder.OrderDetail = new List<OrderDetail>();
                 foreach (DataRow item in dt.Rows)
@@ -42,10 +42,10 @@ namespace HotelManagement.Business.BLL
                     objDetail.OrderID  = !string.IsNullOrEmpty(item["OrderID"].ToString()) ? Convert.ToInt32(item["OrderID"].ToString()) : -1;
                     objDetail.Note = item["Note"].ToString();
                     objDetail.ProductName = item["ProductName"].ToString();
-                    objDetail.Price = !string.IsNullOrEmpty(item["Price"].ToString()) ? Convert.ToInt32(item["Price"].ToString()) : -1;
+                    objDetail.Price = !string.IsNullOrEmpty(item["Price"].ToString()) ? Convert.ToInt32(item["Price"].ToString()) : 0;
                     objDetail.ProductID = !string.IsNullOrEmpty(item["ProductID"].ToString()) ? Convert.ToInt32(item["ProductID"].ToString()) : -1;
-                    objDetail.Quantity = !string.IsNullOrEmpty(item["Quantity"].ToString()) ? Convert.ToInt32(item["Quantity"].ToString()) : -1;
-                    objDetail.CreatedDate  = !string.IsNullOrEmpty(item["CreatedDate"].ToString()) ? Convert.ToDateTime(item["CreatedDate"].ToString()) : DateTime.MinValue;
+                    objDetail.Quantity = !string.IsNullOrEmpty(item["Quantity"].ToString()) ? Convert.ToInt32(item["Quantity"].ToString()) : 0;
+                    objDetail.CreatedDate  = !string.IsNullOrEmpty(item["CreatedDate"].ToString()) ? Convert.ToDateTime(item["CreatedDate"].ToString()).ToString("dd/MM/yyyy hh:mm") : string.Empty;
                     objOrder.OrderDetail.Add(objDetail);
                 }
             }
