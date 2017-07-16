@@ -22,8 +22,20 @@ namespace HotelManagement.WebApi.Controllers
         [HttpPost]
         public HttpResponseMessage Insert_Update([FromBody]OrderBO objOrder)
         {
-            DateTime dtFromDate = !string.IsNullOrEmpty(objOrder.CheckinDate) ? Convert.ToDateTime(objOrder.CheckinDate) : DateTime.Now;
-            DateTime dtToDate = !string.IsNullOrEmpty(objOrder.CheckOutDate) ? Convert.ToDateTime(objOrder.CheckOutDate) : DateTime.MinValue;
+            DateTime dtFromDate = DateTime.Now;
+            if (!string.IsNullOrEmpty(objOrder.CheckinDate))
+            {
+                var arr = objOrder.CheckinDate.Substring(0,objOrder.CheckinDate.IndexOf(" ")).Split('/');
+                var arrHour = objOrder.CheckinDate.Substring(objOrder.CheckinDate.IndexOf(" ") + 1).Split(':');
+                dtFromDate = new DateTime(Convert.ToInt32(arr[2]), Convert.ToInt32(arr[1]), Convert.ToInt32(arr[0]), Convert.ToInt32(arrHour[0]), Convert.ToInt32(arrHour[1]),0);
+            }
+            DateTime dtToDate = DateTime.MinValue;
+            if (!string.IsNullOrEmpty(objOrder.CheckOutDate))
+            {
+                var arr = objOrder.CheckOutDate.Substring(0, objOrder.CheckOutDate.LastIndexOf(" ")).Split('/');
+                var arrHour = objOrder.CheckOutDate.Substring(objOrder.CheckOutDate.LastIndexOf(" ") + 1).Split(':');
+                dtToDate = new DateTime(Convert.ToInt32(arr[2]), Convert.ToInt32(arr[1]), Convert.ToInt32(arr[0]), Convert.ToInt32(arrHour[0]), Convert.ToInt32(arrHour[1]), 0);
+            }
             var result = objBLL.Insert_Update(objOrder.OrderID, objOrder.RoomID, objOrder.CustomerID, objOrder.CustomerName, objOrder.Phone, objOrder.Address, objOrder.IDNo, objOrder.Email, dtFromDate, dtToDate, objOrder.QuantityPeople, objOrder.Note, objOrder.Userlogin,objOrder.OrderDetail);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
             return response;
