@@ -40,5 +40,12 @@ namespace HotelManagement.WebApi.Controllers
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
             return response;
         }
+        [HttpGet]
+        public HttpResponseMessage OrderDetail_Delete(int OrderID, string Userlogin)
+        {
+            var result = objBLL.OrderDetail_Delete(OrderID,Userlogin);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            return response;
+        }
     }
 }

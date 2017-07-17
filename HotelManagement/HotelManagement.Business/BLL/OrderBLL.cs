@@ -70,5 +70,9 @@ namespace HotelManagement.Business.BLL
             }
             return 1;
         }
+        public int OrderDetail_Delete(int intOrderID, string strUserlogin)
+        {
+            return objDAO.OrderDetail_Delete(intOrderID,strUserlogin);
+        }
     }
 }

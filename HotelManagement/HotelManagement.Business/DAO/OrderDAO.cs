@@ -144,5 +144,31 @@ namespace HotelManagement.Business.DAO
                 objData.Disconnect();
             }
         }
+
+        /// <summary>
+        /// Xóa phòng
+        /// </summary>
+        /// <returns></returns>
+        public int OrderDetail_Delete(int intOrderID, string strUserlogin)
+        {
+            IData objData = Data.CreateData();
+            try
+            {
+                objData.Connect();
+                objData.CreateNewStoredProcedure("Product_Delete");
+                objData.AddParameter("@ID", intOrderID);
+                objData.AddParameter("@Userlgon", strUserlogin);
+                objData.ExecNonQuery();
+                return 1;
+            }
+            catch (Exception objEx)
+            {
+                throw objEx;
+            }
+            finally
+            {
+                objData.Disconnect();
+            }
+        }
     }
 }
