@@ -115,5 +115,25 @@ namespace HotelManagement.Business.DAO
                 objData.Disconnect();
             }
         }
+        public DataTable Login(string strUsername, string strPassword)
+        {
+            IData objData = Data.CreateData();
+            try
+            {
+                objData.Connect();
+                objData.CreateNewStoredProcedure("System_User_Login");
+                objData.AddParameter("@Username", strUsername);
+                objData.AddParameter("@Password", strPassword);
+                return objData.ExecStoreToDataTable();
+            }
+            catch (Exception objEx)
+            {
+                throw objEx;
+            }
+            finally
+            {
+                objData.Disconnect();
+            }
+        }
     }
 }

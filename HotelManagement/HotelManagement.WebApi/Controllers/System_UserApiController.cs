@@ -36,6 +36,12 @@ namespace HotelManagement.WebApi.Controllers
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
             return response;
         }
+        public HttpResponseMessage Login(string Username,string Password)
+        {
+            var result = objBLL.Login(Username, Password);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            return response;
+        }
     }
 
 }
