@@ -52,7 +52,7 @@ namespace HotelManagement.Business.BLL
             
             return objOrder;
         }
-        public int Insert_Update(int intOrderID, int intRoomID, int intCustomerID, string strCustomerName, string strPhone, string strAddress, string strIDNo, string strEmail, DateTime CheckinDate, DateTime CheckOutDate, int intQuantityPeople, string Note, string Userlogin,List<OrderDetail> objOrderDetail)
+        public int Insert_Update(int intOrderID, int intRoomID, int intCustomerID, string strCustomerName, string strPhone, string strAddress, string strIDNo, string strEmail, DateTime CheckinDate, DateTime CheckOutDate, int intQuantityPeople, string Note, string Userlogin)
         {
             if (CheckinDate == null | CheckinDate == DateTime.MinValue)
             {
@@ -60,16 +60,15 @@ namespace HotelManagement.Business.BLL
             }
             
             int OrderID = objDAO.Insert_Update(intOrderID, intRoomID, intCustomerID, strCustomerName, strPhone, strAddress, strIDNo, strEmail, CheckinDate, CheckOutDate, intQuantityPeople, Note, Userlogin);
-            if (OrderID > 0)
-            {
-                foreach (OrderDetail item in objOrderDetail)
-                {
-                    objDAO.InsertDetail(item.OrderID, item.ProductID, item.Quantity, item.Price, "", Userlogin);
-                }
-                
-            }
             return 1;
         }
+
+        public int Insert_OrderDetail(int intOrderID, int intProductID,int intQuantity, double dPrice,string Note, string Userlogin)
+        {
+            int value = objDAO.InsertDetail(intOrderID, intProductID,intQuantity,dPrice,Note, Userlogin);
+            return 1;
+        }
+
         public int OrderDetail_Delete(int intOrderID, string strUserlogin)
         {
             return objDAO.OrderDetail_Delete(intOrderID,strUserlogin);
