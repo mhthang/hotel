@@ -36,7 +36,7 @@ namespace HotelManagement.WebApi.Controllers
                 var arrHour = objOrder.CheckOutDate.Substring(objOrder.CheckOutDate.LastIndexOf(" ") + 1).Split(':');
                 dtToDate = new DateTime(Convert.ToInt32(arr[2]), Convert.ToInt32(arr[1]), Convert.ToInt32(arr[0]), Convert.ToInt32(arrHour[0]), Convert.ToInt32(arrHour[1]), 0);
             }
-            var result = objBLL.Insert_Update(objOrder.OrderID, objOrder.RoomID, objOrder.CustomerID, objOrder.CustomerName, objOrder.Phone, objOrder.Address, objOrder.IDNo, objOrder.Email, dtFromDate, dtToDate, objOrder.QuantityPeople, objOrder.Note, objOrder.Userlogin,objOrder.OrderDetail);
+            var result = objBLL.Insert_Update(objOrder.OrderID, objOrder.RoomID, objOrder.CustomerID, objOrder.CustomerName, objOrder.Phone, objOrder.Address, objOrder.IDNo, objOrder.Email, dtFromDate, dtToDate, objOrder.QuantityPeople, objOrder.Note, objOrder.Userlogin);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
             return response;
         }
@@ -44,6 +44,14 @@ namespace HotelManagement.WebApi.Controllers
         public HttpResponseMessage OrderDetail_Delete(int OrderID, string Userlogin)
         {
             var result = objBLL.OrderDetail_Delete(OrderID,Userlogin);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            return response;
+        }
+
+        [HttpGet]
+        public HttpResponseMessage OrderDetail_Insert(OrderDetail objDetail)
+        {
+            var result = objBLL.Insert_OrderDetail(objDetail.OrderID,objDetail.ProductID,objDetail.Quantity,objDetail.Price,objDetail.Note,"Chó Quốc");
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
             return response;
         }
