@@ -1,28 +1,36 @@
-/**
- * INSPINIA - Responsive Admin Theme
- *
- */
-(function () {
-    angular.module('inspinia', [
-        'ui.router',                    // Routing
-        'oc.lazyLoad',                  // ocLazyLoad
-        'ui.bootstrap',                 // Ui Bootstrap
-        'pascalprecht.translate',       // Angular Translate
-        'ngIdle',                       // Idle timer
-        'ngSanitize',                    // ngSanitize
-        'ngMaterial',
-        'googlechart',
-        'oitozero.ngSweetAlert',
-        'angularSpinners',
-        'angular-timeago',
-        'ngStorage',
-        'ngDraggable',
-        'datePicker',
-        'ImageCropper',
-        'ngAutoSave',
-        'isoCurrency',
-        'vcRecaptcha'
-    ])
-})();
+﻿var HotelManager = angular.module("HotelManager", ["summernote", "ngSanitize"]);
 
-// Other libraries are loaded dynamically in the config.js file using the library ocLazyLoad
+var addFactory = function (name, factory) {
+    try {
+        HotelManager.factory(name, factory);
+    } catch (e) {
+        console.log(JSON.stringify(e));
+    }
+}
+
+addFactory("$localstorage", $localstorage);
+addFactory("CommonFactory", CommonFactory);
+ 
+addFactory("OrderFactory", OrderFactory);
+ 
+//addFactory("TimeKeepingFactory", TimeKeepingFactory);
+//addFactory("TimeKeepingReportFactory", TimeKeepingReportFactory);
+var addController = function (name, controller) {
+    try {
+        HotelManager.controller(name, controller);
+    } catch (e) {
+        console.log(JSON.stringify(e));
+    }
+}
+
+//#region Controller
+ 
+addController("OrderController", OrderController);
+
+//addController("TimeKeepingController", TimeKeepingController);
+//addController("TimeKeepingReportController", TimeKeepingReportController);
+
+//#endregion
+ 
+
+
