@@ -21,7 +21,7 @@ namespace HotelManagement.WebApi.Controllers
         }
         [HttpPost]
         public HttpResponseMessage Insert_Update([FromBody]OrderBO objOrder)
-        {
+            {
             DateTime dtFromDate = DateTime.Now;
             if (!string.IsNullOrEmpty(objOrder.CheckinDate))
             {
@@ -48,8 +48,8 @@ namespace HotelManagement.WebApi.Controllers
             return response;
         }
 
-        [HttpGet]
-        public HttpResponseMessage OrderDetail_Insert(OrderDetail objDetail)
+        [HttpPost]
+        public HttpResponseMessage OrderDetailInsert([FromBody]OrderDetail objDetail)
         {
             var result = objBLL.Insert_OrderDetail(objDetail.OrderID,objDetail.ProductID,objDetail.Quantity,objDetail.Price,objDetail.Note,"Chó Quốc");
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);

@@ -20,9 +20,7 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="~/Content/Theme/plugins/iCheck/flat/blue.css">
     <!-- Morris chart -->
-    <link rel="stylesheet" href="~/Content/Theme/plugins/morris/morris.css">
     <!-- jvectormap -->
-    <link rel="stylesheet" href="~/Content/Theme/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <!-- Date Picker -->
     <link rel="stylesheet" href="~/Content/Theme/plugins/datepicker/datepicker3.css">
     <!-- Daterange picker -->
@@ -36,17 +34,40 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src="~/Scripts/angular-1.3.7/angular.min.js"></script>
+    <script src="~/Scripts/angular-sanitize.min.js"></script>
+    <script src="~/Scripts/angular-summernote.js"></script>
+
+    <script src="~/Scripts/factories/AccountFactory.js"></script>
+    <script src="~/Scripts/factories/CommonFactory.js"></script>
+    <script src="~/Scripts/controllers/AccountController.js"></script>
+    <script src="~/Scripts/controllers/MailsController.js"></script>
+
+    @*/////////////////// AngularJS//////////////////////*@
+    <script src="~/Areas/Management/Scripts/Controller/OrderController.js"></script>
+    <script src="~/Areas/Management/Scripts/Factory/OrderFatory.js"></script>
+
+
+
+
+    
+    @*/////////////////// AngularJS//////////////////////*@
+
+    <script src="~/Scripts/libjs.js"></script>
+    <script src="~/Scripts/app.js"></script>
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" ng-app="HotelManager" ng-cloak>
     <div class="wrapper">
+
+
         <header class="main-header">
             <!-- Logo -->
             <a href="index2.html" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>A</b>LT</span>
+                <span class="logo-mini"><b>P</b> </span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Admin</b>LTE</span>
+                <span class="logo-lg"><b>PLATINUM</b> Hotel</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -331,6 +352,41 @@
         </aside>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+
+            <style>
+                .fullscreenDiv {
+                    background-color: #ffffff;
+                    width: 100%;
+                    height: auto;
+                    bottom: 0px;
+                    top: 0px;
+                    left: 0;
+                    position: absolute;
+                    z-index: 100;
+                    opacity: 0.4;
+                }
+
+                    .fullscreenDiv .center {
+                        background-color: #006dad;
+                        right: 0;
+                        height: auto;
+                        bottom: 0px;
+                        top: 0px;
+                        left: 0;
+                        position: fixed;
+                        z-index: 1000;
+                        overflow: hidden;
+                    }
+
+                        .fullscreenDiv .center i {
+                            COLOR: BLANCHEDALMOND;
+                            margin: auto;
+                            top: 50%;
+                            LEFT: 50%;
+                            POSITION: absolute;
+                            z-index: 10000000000;
+                        }
+            </style>
             @RenderBody()
         </div><!-- /.content-wrapper -->
         <footer class="main-footer">
@@ -510,7 +566,7 @@
     <script src="~/Content/Theme/bootstrap/js/bootstrap.min.js"></script>
     <!-- Morris.js charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="~/Content/Theme/plugins/morris/morris.min.js"></script>
+
     <!-- Sparkline -->
     <script src="~/Content/Theme/plugins/sparkline/jquery.sparkline.min.js"></script>
     <!-- jvectormap -->
@@ -523,6 +579,8 @@
     <script src="~/Content/Theme/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- datepicker -->
     <script src="~/Content/Theme/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Content/Theme/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <link href="~/Content/Theme/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" />
     <!-- Bootstrap WYSIHTML5 -->
     <script src="~/Content/Theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
     <!-- Slimscroll -->
@@ -531,9 +589,11 @@
     <script src="~/Content/Theme/plugins/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Content/Theme/dist/js/app.min.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="~/Content/Theme/dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/Content/Theme/dist/js/demo.js"></script>
+    <script src="~/Scripts/printThis.js"></script>
 </body>
 </html>
+<style>
+
+</style>

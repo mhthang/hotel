@@ -48,7 +48,7 @@
         }
     }
     $scope.ViewOrderDetail = function (it) {
-        debugger;
+
         var OrderID = it.ORDERID;
         var RoomID = it.ID;
         if (OrderID == null) {
@@ -63,10 +63,12 @@
     }
     // Lấy chi tiết hóa đon 
     $scope.GetOrderDetail = function () {
-
+        var OrderID = 0;
         OrderID = window.location.href.split('-').slice(-2)[0];
         var RoomID = window.location.href.split('-').slice(-1)[0];
-      
+
+
+
         var requestModel = {
             OrderID: OrderID
         };
@@ -76,7 +78,7 @@
             // when the response is available    
 
             $scope.OrderDetail = response.data;
-
+            debugger;
             if ($scope.OrderDetail.OrderDetail) {
                 if ($scope.OrderDetail.OrderDetail.length > 0) {
                     var RoomBill = $scope.OrderDetail.TotalRoom
@@ -87,9 +89,26 @@
                 }
 
             }
-            debugger;
+
             $scope.TotalBill = RoomBill + ProductBill;
             $scope.OrderDetail.RoomID = RoomID;
+            if (OrderID == 0) {
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1; //January is 0!
+                var hh = today.getHours();
+                var mm = today.getMinutes();
+                var yyyy = today.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+                var today = dd + '/' + mm + '/' + yyyy + ' ' + hh + ':' + mm;
+                $scope.OrderDetail.CheckinDate == "today";
+
+            }
         }, function (response) {
 
             // called asynchronously if an error occurs
@@ -98,9 +117,10 @@
     };
     // Lấy TTKH
     $scope.GetCustomerInfo = function () {
-        $scope.IsLoadingPage = true;
+
         var key = $scope.OrderDetail.Phone;
         if (key.length >= 9) {
+            //   $scope.IsLoadingPage = true;
             var requestModel = {
                 Keyword: '',
                 Phone: key,
@@ -144,48 +164,51 @@
         ///VAlid data
         var checkin = $('#CheckinDate').val()
         var checkout = $('#CheckOutDate').val()
-
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1; //January is 0!
-        var hh = today.getHours();
-        var mm = today.getMinutes();
-        var yyyy = today.getFullYear();
-        if (dd < 10) {
-            dd = '0' + dd;
+        if (checkout == undefined) {
+            checkout = null;
         }
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-        var today = dd + '/' + mm + '/' + yyyy + ' ' + hh + ':' + mm;
+        debugger;
+        //var today = new Date();
+        //var dd = today.getDate();
+        //var mm = today.getMonth() + 1; //January is 0!
+        //var hh = today.getHours();
+        //var mm = today.getMinutes();
+        //var yyyy = today.getFullYear();
+        //if (dd < 10) {
+        //    dd = '0' + dd;
+        //}
+        //if (mm < 10) {
+        //    mm = '0' + mm;
+        //}
+        //var today = dd + '/' + mm + '/' + yyyy + ' ' + hh + ':' + mm; 
 
-
-
-        if (checkin == '' || checkin == null || checkin == undefined) {
-            checkin = today;
+        //if (checkin == '' || checkin == null || checkin == undefined) {
+        //    checkin = today;
+        //}
+        //else {
+        //    checkin = checkin + ' ' + hh + ':' + mm;
+        //}
+        if ($scope.OrderDetail.OrderID < 1) {
+            $scope.OrderDetail.OrderDetail = [];
         }
-        else {
-            checkin = checkin + ' ' + hh + ':' + mm;
-        }
-        $scope.OrderDetail.OrderDetail = [];
         $scope.OrderDetail.Userlogin = '123';
         $scope.OrderDetail.CheckinDate = checkin;
-        $scope.OrderDetail.CheckOutDate = null;
+        $scope.OrderDetail.CheckOutDate = checkout;
         var res = $scope.OrderDetail;
-        debugger;
+
         //Luu data
         $scope.IsLoadingPage = true;
         var requestModel = {
             objOrder: res
         };
         $http.post("/api/orderapi/Insert_Update", res).then(function (response) {
-            debugger;
-            if (response.data ==1) {
-                alert("Tạo phòng thành công");
-               
+
+            if (response.data == 1) {
+                alert("Thành công");
+
                 location.href = "/danh-sach-phong"
                 //window.location.replace('/phieu-dat-phong-' + $scope.OrderDetail.OrderID + '-' + $scope.OrderDetail.RoomID)
-                 $scope.IsLoadingPage = false;
+                $scope.IsLoadingPage = false;
             }
             $scope.IsLoadingPage = false;
         }, function (response) {
@@ -193,24 +216,60 @@
 
     }
     $scope.printDiv = function () {
+       
+        //try {
 
-        try {
-
-            var oIframe = document.getElementById('invoice');
-            var oContent = document.getElementById('invoice').innerHTML;
-            var oDoc = (oIframe.contentWindow || oIframe.contentDocument);
-            //if (oDoc.document) oDoc = oDoc.document;
-            oDoc.write("<head><title>title</title>");
-            oDoc.write("</head><body onload='this.focus(); this.print();'>");
-            oDoc.write(oContent + "</body>");
-            oDoc.close();
-        } catch (e) {
-            self.print();
-        }
+        //    var oIframe = document.getElementById('invoice');
+        //    var oContent = document.getElementById('invoice').innerHTML;
+        //    var oDoc = (oIframe.contentWindow || oIframe.contentDocument);
+        //    //if (oDoc.document) oDoc = oDoc.document;
+        //    oDoc.write("<head><title>title</title>");
+        //    oDoc.write("</head><body onload='this.focus(); this.print();'>");
+        //    oDoc.write(oContent + "</body>");
+        //    oDoc.close();
+        //} catch (e) {
+        //    self.print();
+        //}
 
 
     }
+    $scope.AddProduct = function () {
+        debugger;
+        var PID = $('#ddlProduct').val().split('-');
+        var intQuantity = $('#txtQuantity').val();
+        if (intQuantity < 1) {
+            alert("Nhập số lượng");
+            return;
+        }
+        if (PID < 1) {
+            alert("Chọn sản phẩm");
+            return;
+        }
+        //Add prduct into list
+        var lstAddProduct = {};
+        lstAddProduct.OrderID = $scope.OrderDetail.OrderID;
+        lstAddProduct.ProductID = PID[0];
+        lstAddProduct.ProductName = $("#ddlProduct option:selected").text();
+        lstAddProduct.Quantity = intQuantity;
+        lstAddProduct.Price = PID[1] * intQuantity;
+        lstAddProduct.Note = '';
+        lstAddProduct.CreatedDate = ''; 
+        $scope.IsLoadingPage = true;
+        debugger;
+        var requestModel = {
+            objProduct: lstAddProduct
+        };
+        $http.post("/api/orderapi/OrderDetailInsert", lstAddProduct).then(function (response) {
+            if (response.data) {
+                alert("Thành công");
+                $scope.GetOrderDetail()
 
+                $scope.IsLoadingPage = false;
+            }
+            $scope.IsLoadingPage = false;
+        }, function (response) {
+        });
+    }
 }
 
 OrderController.$inject = ["$scope", "$rootScope", "$localstorage", "$timeout", "$location", "$http", "OrderFactory"];

@@ -233,6 +233,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\Management\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
@@ -243,7 +245,6 @@
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ProductApiController.cs" />
     <Compile Include="Controllers\RoomApiController.cs" />
-    <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\System_UserApiController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -252,6 +253,7 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -259,6 +261,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Areas\Management\Scripts\Controller\OrderController.js" />
+    <Content Include="Areas\Management\Scripts\Factory\OrderFatory.js" />
+    <Content Include="Areas\Management\Scripts\Factory\OrderReportFactory.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Theme\bootstrap\css\bootstrap.css" />
@@ -863,6 +868,11 @@
     <Content Include="Content\Theme\plugins\daterangepicker\daterangepicker.js" />
     <Content Include="Content\Theme\plugins\daterangepicker\moment.js" />
     <Content Include="Content\Theme\plugins\daterangepicker\moment.min.js" />
+    <Content Include="Content\Theme\plugins\datetimepicker\css\bootstrap-datetimepicker-standalone.css" />
+    <Content Include="Content\Theme\plugins\datetimepicker\css\bootstrap-datetimepicker.css" />
+    <Content Include="Content\Theme\plugins\datetimepicker\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\Theme\plugins\datetimepicker\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\Theme\plugins\datetimepicker\js\moment-with-locales.js" />
     <Content Include="Content\Theme\plugins\fastclick\fastclick.js" />
     <Content Include="Content\Theme\plugins\fastclick\fastclick.min.js" />
     <Content Include="Content\Theme\plugins\flot\excanvas.js" />
@@ -1126,6 +1136,8 @@
     </Content>
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\angular-sanitize.min.js" />
+    <Content Include="Scripts\angular-summernote.js" />
     <Content Include="Scripts\angular-translate\angular-translate.min.js" />
     <Content Include="Scripts\angular\angular-animate.js" />
     <Content Include="Scripts\angular\angular-animate.min.js" />
@@ -1158,10 +1170,12 @@
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap\ui-bootstrap-tpls-0.12.0.min.js" />
+    <Content Include="Scripts\bundleJS.js" />
     <Content Include="Scripts\commons.js" />
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\constants.js" />
     <Content Include="Scripts\controllers.js" />
+    <Content Include="Scripts\controllers\AccountController.js" />
     <Content Include="Scripts\controllers\AccountsCtrl.js" />
     <Content Include="Scripts\controllers\AdminPortalNavigatorCtrl.js" />
     <Content Include="Scripts\controllers\admin\AdminContentCtrl.js" />
@@ -1192,6 +1206,7 @@
     <Content Include="Scripts\controllers\FaqAdminQuestionCtrl.js" />
     <Content Include="Scripts\controllers\HeaderCtrl.js" />
     <Content Include="Scripts\controllers\LandingPageController.js" />
+    <Content Include="Scripts\controllers\MailsController.js" />
     <Content Include="Scripts\controllers\messaging\MessagingMailComposeCtrl.js" />
     <Content Include="Scripts\controllers\messaging\MessagingMailInboxCtrl.js" />
     <Content Include="Scripts\controllers\messaging\MessagingMailOutboxCtrl.js" />
@@ -1241,7 +1256,9 @@
     <Content Include="Scripts\controllers\usermanagement\UserListCtrl.js" />
     <Content Include="Scripts\controllers\UserProfileCtrl.js" />
     <Content Include="Scripts\directives.js" />
+    <Content Include="Scripts\factories\AccountFactory.js" />
     <Content Include="Scripts\factories\AuthHttpResponseInterceptor.js" />
+    <Content Include="Scripts\factories\CommonFactory.js" />
     <Content Include="Scripts\factories\LoginFactory.js" />
     <Content Include="Scripts\factories\RegistrationFactory.js" />
     <Content Include="Scripts\inspinia.js" />
@@ -1365,6 +1382,9 @@
     <Content Include="Content\Theme\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="Content\Theme\plugins\input-mask\phone-codes\phone-codes.json" />
     <Content Include="Content\Theme\README.md" />
+    <Content Include="Areas\Management\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -1378,6 +1398,7 @@
     <Content Include="Scripts\jquery\jquery-ui-1.10.4.min.js" />
     <Content Include="Scripts\jquery\jquery-ui.custom.min.js" />
     <Content Include="Scripts\jquery\moment.min.js" />
+    <Content Include="Scripts\libjs.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -1950,6 +1971,7 @@
     <Content Include="Scripts\plugins\uiMask\masks.js" />
     <Content Include="Scripts\plugins\uiTree\angular-ui-tree.min.js" />
     <Content Include="Scripts\plugins\validate\jquery.validate.min.js" />
+    <Content Include="Scripts\printThis.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
@@ -2003,13 +2025,14 @@
     <Content Include="Views\Shared\Admin\_RightSidebar.cshtml" />
     <Content Include="Views\Shared\Admin\_SkinConfig.cshtml" />
     <Content Include="Views\Shared\Admin\_TopNavbar.cshtml" />
-    <Content Include="Views\Room\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Room\RoomList.cshtml" />
-    <Content Include="Views\Room\RoomDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Management\Models\" />
+    <Folder Include="Areas\Management\Views\Order\" />
+    <Folder Include="Areas\Management\Views\Shared\" />
+    <Folder Include="Scripts\angular-1.3.7\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
