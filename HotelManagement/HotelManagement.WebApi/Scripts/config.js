@@ -24,9 +24,9 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, $localStorage
     IdleProvider.idle(5); // in seconds
     IdleProvider.timeout(120); // in seconds
 
-    //$httpProvider.interceptors.push('AuthInterceptorService');
+    $httpProvider.interceptors.push('AuthInterceptorService');
 
-    $urlRouterProvider.otherwise("/app");
+    $urlRouterProvider.otherwise("/login");
 
     $ocLazyLoadProvider.config({
         // Set to true if you want to see what and when is dynamically loaded
@@ -227,12 +227,6 @@ function config($stateProvider, $urlRouterProvider, $httpProvider, $localStorage
             controller: AccountLoginCtrl,
             data: { pageTitle: 'Test', specialClass: 'gray-bg' }
         })
-        .state('app.room', {
-            url: "/room",
-            templateUrl: "/Room/Index",
-            controller: RoomListCtrl,
-            data: { pageTitle: 'Room', specialClass: 'gray-bg' }
-        })
         .state('register', {
             url: "/Account/Register",
             templateUrl: "/Account/Register",
@@ -262,6 +256,9 @@ angular
     .module('inspinia')
     .constant('Constants', Constants)
     .constant('Commons', Commons)
+    .factory('AuthService', AuthService)
+    .factory('AuthInterceptorService', AuthInterceptorService)
+    .factory('UserPhotoService', UserPhotoService)
     .config(setUrlMatcherFactoryProvider)
     .config(config)
     .run(function($rootScope, $state) {

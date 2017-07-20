@@ -73,5 +73,10 @@ namespace HotelManagement.Business.BLL
         {
             return objDAO.OrderDetail_Delete(intOrderID,strUserlogin);
         }
+
+        public int Order_Room_UpdateStatus(int intRoomID, int intOrderID, int intStatus)
+        {
+            return objDAO.Order_Room_UpdateStatus(intRoomID,intOrderID, intStatus);
+        }
     }
 }

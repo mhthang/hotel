@@ -55,5 +55,12 @@ namespace HotelManagement.WebApi.Controllers
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
             return response;
         }
+
+        public HttpResponseMessage Order_Room_UpdateStatus(int intRoomID, int intOrderID, int intStatus)
+        {
+            var result = objBLL.Order_Room_UpdateStatus(intRoomID, intOrderID, intStatus);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            return response;
+        }
     }
 }

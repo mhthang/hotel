@@ -170,5 +170,28 @@ namespace HotelManagement.Business.DAO
                 objData.Disconnect();
             }
         }
+
+        public int Order_Room_UpdateStatus(int intRoomID,int intOrderID, int intStatus)
+        {
+            IData objData = Data.CreateData();
+            try
+            {
+                objData.Connect();
+                objData.CreateNewStoredProcedure("Order_Room_UpdateStatus");
+                objData.AddParameter("@RoomID", intRoomID);
+                objData.AddParameter("@OrderID", intOrderID);
+                objData.AddParameter("@Status", intStatus);
+                objData.ExecNonQuery();
+                return 1;
+            }
+            catch (Exception objEx)
+            {
+                throw objEx;
+            }
+            finally
+            {
+                objData.Disconnect();
+            }
+        }
     }
 }
