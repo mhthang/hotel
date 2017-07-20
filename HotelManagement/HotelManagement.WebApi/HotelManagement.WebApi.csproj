@@ -235,6 +235,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Areas\Management\Controllers\OrderController.cs" />
     <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
+    <Compile Include="Controllers\AccountApiController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
@@ -253,6 +254,7 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Signin.cs" />
     <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -1382,6 +1384,9 @@
     <Content Include="Content\Theme\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="Content\Theme\plugins\input-mask\phone-codes\phone-codes.json" />
     <Content Include="Content\Theme\README.md" />
+    <Content Include="Areas\Management\Views\Room\RoomDetail.cshtml" />
+    <Content Include="Areas\Management\Views\Room\RoomList.cshtml" />
+    <Content Include="Areas\Management\Views\web.config" />
     <Content Include="Areas\Management\Views\web.config">
       <SubType>Designer</SubType>
     </Content>

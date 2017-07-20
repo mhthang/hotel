@@ -19,5 +19,9 @@ namespace HotelManagement.Business.BLL
         {
             return objDAO.GetGroupByOrderID(intOderID);
         }
+        public int Insert_Update(int ProductID, string ProductName, int Price, int Unit, string Note, string Userlogin)
+        {
+            return objDAO.Insert_Update(ProductID, ProductName, Price, Unit, Note, Userlogin);
+        }
     }
 }

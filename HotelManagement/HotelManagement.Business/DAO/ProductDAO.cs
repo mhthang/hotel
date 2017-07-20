@@ -50,5 +50,31 @@ namespace HotelManagement.Business.DAO
                 objData.Disconnect();
             }
         }
+
+        public int Insert_Update(int ProductID,string ProductName, int Price, int Unit, string Note, string Userlogin)
+        {
+            IData objData = Data.CreateData();
+            try
+            {
+                objData.Connect();
+                objData.CreateNewStoredProcedure("Product_Insert");
+                objData.AddParameter("@ProductID", ProductID);
+                objData.AddParameter("@ProductName", ProductName);
+                objData.AddParameter("@Price", Price);
+                objData.AddParameter("@Unit", Unit);
+                objData.AddParameter("@Note", Note);
+                objData.AddParameter("@Userlogin", Userlogin);
+                objData.ExecNonQuery();
+                return 1;
+            }
+            catch (Exception objEx)
+            {
+                throw objEx;
+            }
+            finally
+            {
+                objData.Disconnect();
+            }
+        }
     }
 }

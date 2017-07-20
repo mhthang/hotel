@@ -23,5 +23,13 @@ namespace HotelManagement.WebApi.Controllers
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
             return response;
         }
+
+
+        public HttpResponseMessage Insert_Update(int ProductID, string ProductName, int Price, int Unit, string Note, string Userlogin)
+        {
+            var result = objBLL.Insert_Update(ProductID, ProductName, Price, Unit, Note,"Cho quoc");
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            return response;
+        }
     }
 }

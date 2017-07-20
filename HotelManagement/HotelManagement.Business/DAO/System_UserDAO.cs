@@ -135,5 +135,29 @@ namespace HotelManagement.Business.DAO
                 objData.Disconnect();
             }
         }
+
+        public bool ChangePassword(string strUsername, string strPassword)
+        {
+            IData objData = Data.CreateData();
+            try
+            {
+                objData.Connect();
+                objData.CreateNewStoredProcedure("System_User_ChangePassword");
+                objData.AddParameter("@Username", strUsername);
+                objData.AddParameter("@Password", strPassword);
+                objData.ExecNonQuery();
+                return true;
+            }
+            catch (Exception objEx)
+            {
+                return false;
+                throw objEx;
+            }
+            finally
+            {
+                objData.Disconnect();
+            }
+            
+        }
     }
 }

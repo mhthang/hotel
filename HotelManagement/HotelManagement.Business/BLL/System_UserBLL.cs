@@ -26,7 +26,7 @@ namespace HotelManagement.Business.BLL
         }
         public int Delete(string strUsername, string strUserlogin)
         {
-            return objDAO.Delete(strUsername,strUserlogin);
+            return objDAO.Delete(strUsername, strUserlogin);
         }
 
         public bool Login(string strUsername, string strPassword)
@@ -39,6 +39,12 @@ namespace HotelManagement.Business.BLL
             }
             return IsLogin;
         }
+
+        public bool ChangePassword(string strUsername, string strPassword)
+        {
+            return objDAO.ChangePassword(strUsername, strPassword);
+        }
+
         public string ToMD5(string str)
         {
 

@@ -42,6 +42,16 @@ namespace HotelManagement.WebApi.Controllers
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
             return response;
         }
+
+        public HttpResponseMessage ChangePassword(string Username, string Password)
+        {
+            int success = 0;
+            if (objBLL.ChangePassword(Username, Password))
+                success = 1;
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, success);
+            return response;
+
+        }
     }
 
 }
