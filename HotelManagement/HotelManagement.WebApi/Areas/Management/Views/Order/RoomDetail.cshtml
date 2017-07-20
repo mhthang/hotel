@@ -1,0 +1,342 @@
+﻿@using HotelManagement.Business.DAO;
+@using System.Data;
+@{
+    ViewBag.Title = "RoomDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ProductDAO objDAO = new ProductDAO();
+    DataTable dt = objDAO.GetAll("", 10000, 1);
+
+}
+<div ng-controller="OrderController" ng-init="GetOrderDetail()">
+    <div class="fullscreenDiv" ng-show="IsLoadingPage">
+        <div class="center">
+            <i class="fa fa-circle-o-notch fa-5x fa-spin" aria-hidden="true"></i>
+        </div>
+    </div>
+    <section class="content-header">
+        <h1>
+            Phiếu đặt phòng
+            <small>Preview</small>
+        </h1>
+
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="box box-primary">
+
+                    <div class="box-body">
+                        <div class="pull-left">
+                            <h4 style="color:red;"><b>Tổng tiền: {{TotalBill | number:0}}đ</b></h4>
+                        </div>
+                        <div class="pull-right">
+                            <button class="btn btn-primary" ng-click="SaveChange()">Cập nhật thông tin </button>
+                            <button class="btn btn-danger" onclick="PrintInvoice()">Tinh tiền </button>
+                            <button class="btn btn-info" data-toggle="modal" data-target="#myModal">In hóa đơn </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Thông tin khách hàng</h3>
+                    </div><!-- /.box-header -->
+                    <!-- form start -->
+                    <form role="form">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="exampleInputPhone">Số điện thoại</label>
+                                <input type="tel" class="form-control" ng-change="GetCustomerInfo()" ng-model="OrderDetail.Phone" id="exampleInputPhone" placeholder="Nhập SDT khách hàng và nhấn enter">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFullName">Tên khách hàng</label>
+                                <input type="text" class="form-control" ng-model="OrderDetail.CustomerName" id="exampleInputFullName" placeholder="Nhập têb khách hàng">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputAddress">Địa chỉ</label>
+                                <input type="text" class="form-control" ng-model="OrderDetail.Address" id="exampleInputAddress" placeholder="Nhập địa chỉ" />
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputIDNO">CMT/Passport</label>
+                                <input type="text" class="form-control" ng-model="OrderDetail.IDNo" id="exampleInputIDNO" placeholder="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" ng-model="OrderDetail.Email" id="exampleInputEmail1" placeholder="Enter email">
+                            </div>
+                        </div><!-- /.box-body -->
+
+                    </form>
+                </div><!-- /.box -->
+
+
+            </div><!--/.col (left) -->
+            <!-- right column -->
+            <div class="col-md-6">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Thông tin đặt phòng {{OrderDetail.RoomName}}</h3>
+                    </div><!-- /.box-header -->
+                    <!-- form start -->
+                    <form role="form">
+                        <div class="box-body">
+                            @*<div class="form-group ">
+                                    <label for="exampleInputCheckin">Ngày checkin</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right datepicker" id="CheckinDate" ng-model="OrderDetail.CheckinDate">
+                                    </div>
+                                </div>*@
+                            <div class="form-group">
+                                <label for="exampleInputCheckin">Ngày checkin</label>
+                                <div class='input-group date datetimepicker2'>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                    <input type='text' class="form-control" id="CheckinDate" ng-model="OrderDetail.CheckinDate" />
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputCheckin">Ngày checkout</label>
+                                <div class='input-group date datetimepicker2'>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                    <input type='text' class="form-control" id="CheckOutDate" ng-model="OrderDetail.CheckOutDate" />
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleRefNumber">Số người đi kèm</label>
+                                <input type="number" class="form-control" ng-model="OrderDetail.QuantityPeople" id="exampleRefNumber" placeholder="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputRefInfo">Thông tin người đi kèm</label>
+                                <textarea id="exampleInputRefInfo" class="form-control" ng-model="OrderDetail.Note" rows="5" placeholder="Tên - CMT - SDT"></textarea>
+                            </div>
+
+
+
+                        </div><!-- /.box-body -->
+                    </form>
+                </div><!-- /.box -->
+
+            </div><!--/.col (right) -->
+        </div>   <!-- /.row -->
+        <div class="row" ng-show="OrderDetail.OrderID > 0">
+            <div class="col-md-6">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Dịch vụ phát sinh</h3>
+                    </div><!-- /.box-header -->
+                    <!-- form start -->
+                    <form role="form">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="exampleInputCheckin">Tên dịch vụ</label>
+                                <select class="form-control select2" style="width: 100%;" ng-model="ddlProduct" id="ddlProduct">
+                                    <option selected="selected" value="">-- Chon dịch vụ --</option>
+                                    @{
+                                        foreach (DataRow dtitem in dt.Rows)
+                                        {
+                                            <option value="@dtitem["ProductID"]-@dtitem["Price"]">@dtitem["ProductName"]</option>
+                                        }
+                                    }
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputCheckin">Số lượng</label>
+                                <input type="number" value="1" min="1" max="10" class="form-control" id="txtQuantity" placeholder="Nhập SL" />
+                            </div>
+
+
+                        </div><!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <button type="button" ng-click="AddProduct()" class="btn btn-primary" n>Thêm</button>
+                        </div>
+                    </form>
+                </div><!-- /.box -->
+
+            </div><!--/.col (right) -->
+            <div class="col-md-6">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">DS dịch vụ</h3>
+
+                    </div><!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>Tên</th>
+                                    <th>SL</th>
+                                    <th>Thành tiền</th>
+                                    <th>Ngày xuất</th>
+                                </tr>
+
+                                <tr ng-repeat="item in OrderDetail.OrderDetail">
+                                    <th>{{item.ProductName}}</th>
+                                    <th>{{item.Quantity}}</th>
+                                    <th>{{item.Quantity * item.Price | number}}</th>
+                                    <th>{{item.CreatedDate}}</th>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        @*<div class="col-lg-6 col-md-6 pull-right" style="margin-bottom: 20px; margin-top: 10px; text-align: right">
+                                Thành tiền: <b>sdfas vtqw y</b>
+                            </div>*@
+                    </div><!-- /.box-body -->
+
+                </div><!-- /.box -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12" style="text-align:right">
+                <div class="box box-primary">
+
+                    <div class="box-body">
+                        <button class="btn btn-default">Tinh tiền </button>
+                        <button class="btn btn-default">In hóa đơn </button>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                </div>
+                <div class="modal-body" id="invoice" style="font-size:9PX; width:8cm">
+                    <div class="row">
+                        <div class="col-lg-6 col-xs-6">
+                            <b>PLATINUM HOTEL</b><br />
+                            81 Trần Quang Đạo - Đà Nẵng<br />
+                            0998787656 - (090) 876897487<br />
+                        </div>
+                        <div class="col-lg-6 col-xs-6">
+                            Số HD: PT/@DateTime.Now.ToString("yyyy/MM")/HO{{OrderDetail.OrderID}}<br />
+                            Ngày: @DateTime.Now.ToString("dd/MM/yyyy HH:mm") <br />
+                            NV: Admin<br />
+                        </div>
+                        <div class="col-lg-12 col-xs-12 text-center">
+                            <h5><b>PLATINUM HOTEL</b><br /></h5>
+
+                        </div>
+                        <div class="col-sm-12">
+                            Khách hàng: <b>{{OrderDetail.CustomerName}}</b> <br />
+                            Số DT: {{OrderDetail.Phone}} <br />
+                            Địa chỉ: {{OrderDetail.Address}} <br />
+                            Ngày checkin: {{OrderDetail.CheckinDate}} <br />
+                            Ngày checkout: {{OrderDetail.CheckOutDate}} <br />
+                            <hr style="margin: 5px 0;" />
+                            <b>Thông tin phòng:</b><br />
+                            <table width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Phòng</th>
+                                        <th>Số ngày</th>
+                                        <th>Đơn giá</th>
+                                        <th>T.Tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{OrderDetail.RoomName}}</td>
+                                        <td>{{OrderDetail.TotalRoom / OrderDetail.PriceRoom}}</td>
+                                        <td>{{OrderDetail.PriceRoom  | number:0 }} </td>
+                                        <td>{{OrderDetail.TotalRoom  | number:0 }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div ng-show="OrderDetail.OrderDetail.length > 0">
+                                <b>Thông tin dịch vụ :</b><br />
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Tên DV</th>
+                                            <th>Đơn giá</th>
+                                            <th>S.Lượng</th>
+                                            <th>ĐVT</th>
+                                            <th>T.Tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in OrderDetail.OrderDetail">
+                                            <td>{{item.ProductName}}</td>
+                                            <td>{{item.Price | number:0 }}</td>
+                                            <td>{{item.Quantity}}</td>
+                                            <td>{{item.Unit}}</td>
+                                            <td>{{item.Price *  item.Quantity| number:0 }}</td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <br />
+                            <hr style="margin: 5px 0;" />
+                            <br />
+                            <b class="pull-right" style="margin-right:15px">Tổng tiền: {{TotalBill | number:0}}</b>
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <br />
+                            <hr style="margin: 5px 0;" />
+                            <b><i>Cảm ơn quý khách, hẹn gặp lại!</i></b>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" ng-click="printDiv()">In hóa đơn</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //$(function () {
+    //    $('.datepicker').datepicker({
+    //        autoclose: true,
+    //        format: 'dd/mm/yyyy'
+    //    })
+    //});
+
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('.datetimepicker2').datetimepicker(
+            {
+
+                format: 'DD/MM/YYYY hh:mm'
+            }
+            );
+    });
+
+    var PrintInvoice = function () {
+        $('#invoice').printThis({
+            pageTitle: "",              // add title to print page
+            header: null,               // prefix to html
+            footer: null             // postfix to html
+        });
+    }
+</script>
+<script src="~/Content/Theme/plugins/datetimepicker/js/moment-with-locales.js"></script>
