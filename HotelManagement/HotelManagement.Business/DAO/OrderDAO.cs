@@ -107,7 +107,7 @@ namespace HotelManagement.Business.DAO
                 objData.AddParameter("@Price", dPrice);
                 objData.AddParameter("@Note", Note);
                 objData.AddParameter("@Userlogin", Userlogin);
-                return Convert.ToInt32(objData.ExecStoreToString());
+                return objData.ExecNonQuery();
             }
             catch (Exception objEx)
             {
