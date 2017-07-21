@@ -233,6 +233,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\Management\Controllers\AccountManageController.cs" />
     <Compile Include="Areas\Management\Controllers\OrderController.cs" />
     <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
     <Compile Include="Controllers\AccountApiController.cs" />
@@ -263,7 +264,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Areas\Management\Scripts\Controller\AccountManageController.js" />
     <Content Include="Areas\Management\Scripts\Controller\OrderController.js" />
+    <Content Include="Areas\Management\Scripts\Factory\AccountManageFactory.js" />
     <Content Include="Areas\Management\Scripts\Factory\OrderFatory.js" />
     <Content Include="Areas\Management\Scripts\Factory\OrderReportFactory.js" />
     <Content Include="Content\bootstrap.css" />
@@ -1389,6 +1392,7 @@
     </Content>
     <Content Include="Areas\Management\Views\Order\RoomDetail.cshtml" />
     <Content Include="Areas\Management\Views\Order\RoomList.cshtml" />
+    <Content Include="Areas\Management\Views\AccountManage\UserList.cshtml" />
     <None Include="Properties\PublishProfiles\qlks.huongdaiduong.com - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
