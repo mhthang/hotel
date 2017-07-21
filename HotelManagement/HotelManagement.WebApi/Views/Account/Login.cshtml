@@ -38,9 +38,9 @@
     <script src="~/Scripts/angular-sanitize.min.js"></script>
     <script src="~/Scripts/angular-summernote.js"></script>
 
-    <script src="~/Scripts/factories/AccountFactory.js"></script>
+  
     <script src="~/Scripts/factories/CommonFactory.js"></script>
-    <script src="~/Scripts/controllers/AccountController.js"></script>
+  
     <script src="~/Scripts/controllers/MailsController.js"></script>
 
     @*/////////////////// AngularJS//////////////////////*@
@@ -48,18 +48,18 @@
     <script src="~/Areas/Management/Scripts/Factory/OrderFatory.js"></script>
 
 
-
-
+    <script src="~/Scripts/controllers/AccountController.js"></script>
+    <script src="~/Scripts/factories/AccountFactory.js"></script>
 
     @*/////////////////// AngularJS//////////////////////*@
 
     <script src="~/Scripts/libjs.js"></script>
     <script src="~/Scripts/app.js"></script>
 </head>
-<body class="hold-transition login-page" ng-controller="AccountController">
+<body class="hold-transition login-page" ng-controller="AccountController" ng-app="HotelManager">
     <div class="login-box">
         <div class="login-logo">
-            <a href="../../index2.html"><b>Admin</b>Login</a>
+            <a href="../../index2.html"><b>Admin</b>{{Title}}</a>
         </div><!-- /.login-logo -->
         <div class="login-box-body">
             <p class="login-box-msg">Sign in to start your session</p>

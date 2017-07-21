@@ -270,6 +270,22 @@
         }, function (response) {
         });
     }
+    $scope.DeleteProduct = function (item) {
+        debugger; 
+        var requestModel = {
+            objProduct: lstAddProduct
+        };
+        $http.post("/api/orderapi/OrderDetailInsert", lstAddProduct).then(function (response) {
+            if (response.data) {
+                alert("Thành công");
+                $scope.GetOrderDetail()
+
+                $scope.IsLoadingPage = false;
+            }
+            $scope.IsLoadingPage = false;
+        }, function (response) {
+        });
+    }
 }
 
 OrderController.$inject = ["$scope", "$rootScope", "$localstorage", "$timeout", "$location", "$http", "OrderFactory"];

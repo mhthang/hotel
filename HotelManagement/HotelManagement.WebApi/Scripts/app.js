@@ -12,9 +12,8 @@ addFactory("$localstorage", $localstorage);
 addFactory("CommonFactory", CommonFactory);
  
 addFactory("OrderFactory", OrderFactory);
+ addFactory("AccountFactory", AccountFactory);
  
-//addFactory("TimeKeepingFactory", TimeKeepingFactory);
-//addFactory("TimeKeepingReportFactory", TimeKeepingReportFactory);
 var addController = function (name, controller) {
     try {
         HotelManager.controller(name, controller);
@@ -26,9 +25,9 @@ var addController = function (name, controller) {
 //#region Controller
  
 addController("OrderController", OrderController);
+addController("AccountController", AccountController);
 
-//addController("TimeKeepingController", TimeKeepingController);
-//addController("TimeKeepingReportController", TimeKeepingReportController);
+ 
 
 //#endregion
  

@@ -1384,14 +1384,12 @@
     <Content Include="Content\Theme\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="Content\Theme\plugins\input-mask\phone-codes\phone-codes.json" />
     <Content Include="Content\Theme\README.md" />
-    <Content Include="Areas\Management\Views\Room\RoomDetail.cshtml" />
-    <Content Include="Areas\Management\Views\Room\RoomList.cshtml" />
-    <Content Include="Areas\Management\Views\web.config" />
     <Content Include="Areas\Management\Views\web.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Management\Views\Order\RoomDetail.cshtml" />
     <Content Include="Areas\Management\Views\Order\RoomList.cshtml" />
+    <None Include="Properties\PublishProfiles\qlks.huongdaiduong.com - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -1998,7 +1996,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -2037,6 +2037,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Management\Models\" />
+    <Folder Include="Areas\Management\Views\Room\" />
     <Folder Include="Areas\Management\Views\Shared\" />
     <Folder Include="Scripts\angular-1.3.7\" />
   </ItemGroup>
@@ -2085,6 +2086,9 @@
       <Project>{488269B9-892E-400D-844D-18C8CBA9D731}</Project>
       <Name>HotelManagement.Business</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

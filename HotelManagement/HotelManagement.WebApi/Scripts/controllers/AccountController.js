@@ -1,5 +1,5 @@
 ﻿var AccountController = function ($scope, $rootScope, $localstorage, $timeout, $location, AccountFactory) {
-    $scope.Title = "Đăng nhập";
+    $scope.Title = "Đăng nhập hệ thống";
     $scope.UserName = "";
     $scope.Password = "";
     $scope.isLoading = false;
