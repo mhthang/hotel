@@ -31,8 +31,9 @@
                         </div>
                         <div class="pull-right">
                             <button class="btn btn-primary" ng-click="SaveChange()">Cập nhật thông tin </button>
-                            <button class="btn btn-danger" onclick="PrintInvoice()">Tinh tiền </button>
-                            <button class="btn btn-info" data-toggle="modal" data-target="#myModal">In hóa đơn </button>
+                            <button class="btn btn-danger" ng-click="ChargedBill()">Tinh tiền </button>
+                            <button class="btn btn-default" onclick="PrintInvoice()">n hóa đơn </button>
+                            <button class="btn btn-info" data-toggle="modal" data-target="#myModal">Xem hóa đơn </button>
                         </div>
                     </div>
                 </div>
@@ -183,13 +184,15 @@
                                     <th>SL</th>
                                     <th>Thành tiền</th>
                                     <th>Ngày xuất</th>
+                                    <th>Xóa</th>
                                 </tr>
 
                                 <tr ng-repeat="item in OrderDetail.OrderDetail">
-                                    <th>{{item.ProductName}}</th>
-                                    <th>{{item.Quantity}}</th>
-                                    <th>{{item.Quantity * item.Price | number}}</th>
-                                    <th>{{item.CreatedDate}}</th>
+                                    <td>{{item.ProductName}}</td>
+                                    <td>{{item.Quantity}}</td>
+                                    <td>{{item.Quantity * item.Price | number}}</td>
+                                    <td>{{item.CreatedDate}}</td>
+                                    <td><a ng-click="DeleteProduct(item)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                                 </tr>
 
                             </tbody>
