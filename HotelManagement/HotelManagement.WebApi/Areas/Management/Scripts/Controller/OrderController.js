@@ -137,7 +137,7 @@
                     $scope.OrderDetail.Email = $scope.CusDetail[0].Email;
                     $scope.OrderDetail.IDNo = $scope.CusDetail[0].IDNo;
                     $scope.OrderDetail.Image = $scope.CusDetail[0].Image;
-                    $scope.OrderDetail.Note = $scope.CusDetail[0].Note;
+                    $scope.OrderDetail.Note = "";
                     $scope.OrderDetail.CustomerID = $scope.CusDetail[0].CustomerID;
                 }
                 $scope.IsLoadingPage = false;
@@ -192,17 +192,19 @@
             $scope.OrderDetail.OrderDetail = [];
         }
         $scope.OrderDetail.Userlogin = '123';
+        if ($scope.OrderDetail.Email == undefined) {
+            $scope.OrderDetail.Email = "";
+        }
         $scope.OrderDetail.CheckinDate = checkin;
         $scope.OrderDetail.CheckOutDate = checkout;
         var res = $scope.OrderDetail;
-
+        
         //Luu data
-        $scope.IsLoadingPage = true;
+        //$scope.IsLoadingPage = true;
         var requestModel = {
             objOrder: res
         };
-        $http.post("/api/orderapi/Insert_Update", res).then(function (response) {
-
+        $http.post("/api/orderapi/Insert_Update", res).then(function (response) { 
             if (response.data == 1) {
                 alert("Thành công");
 
@@ -271,15 +273,17 @@
         });
     }
     $scope.DeleteProduct = function (item) {
-        debugger; 
+        debugger;
+        var OrderDetailID = 0;
+        var UserLogin = ""; 
         var requestModel = {
-            objProduct: lstAddProduct
+            OrderID: OrderDetailID,
+            Userlogin: UserLogin
         };
-        $http.post("/api/orderapi/OrderDetailInsert", lstAddProduct).then(function (response) {
+        $http.post("/api/orderapi/OrderDetail_Delete", requestModel).then(function (response) {
             if (response.data) {
                 alert("Thành công");
-                $scope.GetOrderDetail()
-
+                $scope.GetOrderDetail() 
                 $scope.IsLoadingPage = false;
             }
             $scope.IsLoadingPage = false;
