@@ -1,13 +1,14 @@
 ﻿var AccountFactory = function ($rootScope, $localstorage, $timeout, Analytics, CommonFactory) {
     var service = {};
-    var URL = "Home/";
+    var URL = "/api/accountapi/";
     service.Login = function (strUserName, strPassword, callback) {
-        var datasend = JSON.stringify({
-            strUserName: strUserName,
-            strPassword: strPassword
-        });
-
-        CommonFactory.PostDataAjax(URL + "SignIn", datasend,
+        var model = {
+            UserName: strUserName,
+            Password: strPassword,
+            RememberMe: true
+        };
+        
+        CommonFactory.PostDataAjax(URL + "SignIn", model,
             function (err) {
                 debugger
             },

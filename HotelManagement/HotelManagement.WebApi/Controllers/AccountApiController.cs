@@ -43,16 +43,19 @@ namespace KiddyShop.WebApp.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IHttpActionResult> Signin(Signin model)
+        public HttpResponseMessage Signin(Signin model)
         {
-
+            
             if (!ModelState.IsValid)
             {
-                return BadRequest("Username hoặc password không hợp lệ");
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest, "Username hoặc password không hợp lệ");
+                return response;
+               
             }
             if (model == null)
             {
-                return BadRequest();
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest, "");
+                return response;
             }
             bool result = new System_UserBLL().Login(model.UserName,model.Password);
             switch (result)
@@ -60,11 +63,16 @@ namespace KiddyShop.WebApp.Controllers
                 case true:
                     {
                         //return Ok(_accountService.LoginReturnToken(model));
-                        return Ok();
+                        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest, result);
+                        return response;
+                        
                     }
                 case false:
                 default:
-                    return BadRequest("Username hoặc password không đúng");
+                    {
+                        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest, result);
+                        return response;
+                    }
             }
         }
 

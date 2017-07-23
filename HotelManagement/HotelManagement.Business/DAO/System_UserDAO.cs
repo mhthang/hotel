@@ -63,17 +63,19 @@ namespace HotelManagement.Business.DAO
         /// Thêm/ cập nhật phòng
         /// </summary>
         /// <returns></returns>
-        public int Insert_Update(string strUsername,string Fullname,int Position,string Phone,string Address, string Image, string Note, string Userlogin)
+        public int Insert_Update(string strUsername,string Password,string Fullname,int Position,string IDNo,string Phone,string Address, string Image, string Note, string Userlogin)
         {
             IData objData = Data.CreateData();
             try
             {
                 objData.Connect();
                 objData.CreateNewStoredProcedure("System_User_Update");
+                objData.AddParameter("@Password", Password);
                 objData.AddParameter("@Username", strUsername);
                 objData.AddParameter("@Fullname", Fullname);
                 objData.AddParameter("@PositionID", Position);
                 objData.AddParameter("@Image", Image);
+                objData.AddParameter("@IDNo", IDNo);
                 objData.AddParameter("@Address", Address);
                 objData.AddParameter("@Phone",Phone);
                 objData.AddParameter("@Note", Note);

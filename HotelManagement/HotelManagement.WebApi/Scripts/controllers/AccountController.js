@@ -1,17 +1,31 @@
-﻿var AccountController = function ($scope, $rootScope, $localstorage, $timeout, $location, AccountFactory) {
+﻿var AccountController = function ($scope, $rootScope, $localstorage, $timeout, $location,$http, AccountFactory) {
     $scope.Title = "Đăng nhập hệ thống";
-    $scope.UserName = "";
-    $scope.Password = "";
+    $scope.mode = {};
+    
     $scope.isLoading = false;
     $scope.Login = function () {
         try {
             $scope.isLoading = true;
-            AccountFactory.Login($scope.UserName, $scope.Password, function (response) {
-                if (response != null) {
-                    window.location.href = '/listmail?mailtype=inbox';
-                } else
-                    alert("Có lỗi khi đăng nhập");
-                $scope.isLoading = false;
+            if($scope.UserName == "")
+            {
+                alert('Bạn vui lòng nhập username');
+                return;
+            }
+            if ($scope.Password == "") {
+                alert('Bạn vui lòng nhập password');
+                return;
+            }
+            $http.post("/api/accountapi/SignIn", $scope.mode).then(function (response) {
+
+                if (response.data == 1) {
+                    alert("Thành công");
+
+                    location.href = "/danh-sach-phong"
+                    //window.location.replace('/phieu-dat-phong-' + $scope.OrderDetail.OrderID + '-' + $scope.OrderDetail.RoomID)
+                    $scope.IsLoadingPage = false;
+                }
+                $scope.IsLoadingPage = false;
+            }, function (response) {
             });
         } catch (e) {
             alert(e);
@@ -19,4 +33,4 @@
     }
 }
 
-AccountController.$inject = ["$scope", "$rootScope", "$localstorage", "$timeout", "$location", "AccountFactory"];
+AccountController.$inject = ["$scope", "$rootScope", "$localstorage", "$timeout", "$location", "$http", "AccountFactory"];

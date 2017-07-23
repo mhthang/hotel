@@ -11,22 +11,24 @@ namespace HotelManagement.WebApi.Controllers
     public class System_UserApiController : ApiController
     {
         System_UserBLL objBLL = new System_UserBLL();
-
+        [HttpGet]
         public HttpResponseMessage GetAll(string FullName, int intPositionID, string strIDNo, string strPhone)
         {
             var result = objBLL.GetAll(FullName, intPositionID, strIDNo, strPhone);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
             return response;
         }
+        [HttpGet]
         public HttpResponseMessage GetByUsername(string Username)
         {
             var result = objBLL.GetByUsername(Username);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
             return response;
         }
-        public HttpResponseMessage Insert_Update(string strUsername, string Fullname, int Position, string Phone, string Address, string Image, string Note, string Userlogin)
+        [HttpGet]
+        public HttpResponseMessage Insert_Update(string strUsername,string Password, string Fullname, int Position,string IDNo, string Phone, string Address, string Image, string Note)
         {
-            var result = objBLL.Insert_Update(strUsername, Fullname, Position, Phone, Address, Image, Note, Userlogin);
+            var result = objBLL.Insert_Update(strUsername, Password, Fullname, Position, IDNo, Phone, Address, Image, Note, "DMQ");
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
             return response;
         }

@@ -20,9 +20,10 @@ namespace HotelManagement.Business.BLL
             return objDAO.GetByUsername(strUsername);
         }
 
-        public int Insert_Update(string strUsername, string Fullname, int Position, string Phone, string Address, string Image, string Note, string Userlogin)
+        public int Insert_Update(string strUsername,string Password, string Fullname, int Position,string IDNo, string Phone, string Address, string Image, string Note, string Userlogin)
         {
-            return objDAO.Insert_Update(strUsername, Fullname, Position, Phone, Address, Image, Note, Image);
+
+            return objDAO.Insert_Update(strUsername, this.ToMD5(Password), Fullname, Position, IDNo, Phone, Address, Image, Note, Image);
         }
         public int Delete(string strUsername, string strUserlogin)
         {
