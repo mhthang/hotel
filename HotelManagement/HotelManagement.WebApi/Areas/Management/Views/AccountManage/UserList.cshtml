@@ -64,7 +64,7 @@
                             <td><span class="label label-success">{{u.Address}}</span></td>
                             <td>{{u.Phone}}</td>
                             <td>{{u.Note}}</td>
-                            <td><a ng-click="">Edit</a></td>
+                            <td><a ng-click="Edit(u)">Edit</a>&nbsp;<a ng-click="Delete(u.Username)">Xóa</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -138,6 +138,72 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                     <button type="button" class="btn btn-primary" ng-click="CreateUser()">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>Cập nhật nhân viên</h3>
+                </div>
+                <div class="modal-body" id="invoice">
+                    <div class="row">
+                        <div class="col col-lg-6">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="exampleInputUsername">Email address</label>
+                                    <input type="text" class="form-control" ng-model="modeledit.strUsername" id="exampleInputUsername" placeholder="Enter username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control" ng-model="modeledit.Password" id="exampleInputPassword1" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Hình ảnh</label>
+                                    <input type="file" id="exampleInputFile">
+                                </div>
+                                <div class="form-group">
+                                    <label for="examplePosition">Chức vụ</label>
+                                    <select class="form-group" id="examplePosition" ng-model="modeledit.Position">
+                                        <option value="1">Nhân viên</option>
+                                        <option value="2">Quản lý</option>
+                                        <option value="3">...</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-lg-6">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="exampleInputFullname">Họ và tên</label>
+                                    <input type="text" class="form-control" ng-model="modeledit.Fullname" id="exampleInputFullname" placeholder="Họ và tên">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputAddress">Địa chỉ</label>
+                                    <input type="text" class="form-control" ng-model="modelmodeledit.Address" id="exampleInputAddress" placeholder="Địa chỉ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPhone">SĐT</label>
+                                    <input type="tel" class="form-control" ng-model="modeledit.Phone" id="exampleInputPhone" placeholder="Số điện thoại">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputIDNo">CMND</label>
+                                    <input type="tel" class="form-control" ng-model="modeledit.IDNo" id="exampleInputIDNo" placeholder="CMND">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" ng-click="UpdateUser()">Lưu</button>
                 </div>
             </div>
         </div>
